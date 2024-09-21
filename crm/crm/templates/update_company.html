@@ -1,0 +1,122 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی اطلاعات شرکت</h2>
+    
+    <!-- فرم بروزرسانی شرکت -->
+    <form class="form" action="{{ url_for('update_company', company_id=company.id) }}" method="POST">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+        <!-- نام شرکت -->
+        <div class="form-group">
+            <label for="name">نام شرکت</label>
+            {{ form.name(class="form-control", placeholder="نام شرکت") }}
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {% for error in form.name.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- آدرس شرکت -->
+        <div class="form-group">
+            <label for="address">آدرس شرکت</label>
+            {{ form.address(class="form-control", placeholder="آدرس شرکت") }}
+            {% if form.address.errors %}
+                <div class="text-danger">
+                    {% for error in form.address.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شماره تلفن شرکت -->
+        <div class="form-group">
+            <label for="phone_number">شماره تلفن</label>
+            {{ form.phone_number(class="form-control", placeholder="شماره تلفن") }}
+            {% if form.phone_number.errors %}
+                <div class="text-danger">
+                    {% for error in form.phone_number.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شماره تلفن دوم -->
+        <div class="form-group">
+            <label for="phone_number_two">شماره تلفن دوم</label>
+            {{ form.phone_number_two(class="form-control", placeholder="شماره تلفن دوم") }}
+            {% if form.phone_number_two.errors %}
+                <div class="text-danger">
+                    {% for error in form.phone_number_two.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شماره تلفن سوم -->
+        <div class="form-group">
+            <label for="phone_number_three">شماره تلفن سوم</label>
+            {{ form.phone_number_three(class="form-control", placeholder="شماره تلفن سوم") }}
+            {% if form.phone_number_three.errors %}
+                <div class="text-danger">
+                    {% for error in form.phone_number_three.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- فکس -->
+        <div class="form-group">
+            <label for="fax">فکس</label>
+            {{ form.fax(class="form-control", placeholder="فکس") }}
+            {% if form.fax.errors %}
+                <div class="text-danger">
+                    {% for error in form.fax.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- وب‌سایت -->
+        <div class="form-group">
+            <label for="website">وب‌سایت</label>
+            {{ form.website(class="form-control", placeholder="وب‌سایت") }}
+            {% if form.website.errors %}
+                <div class="text-danger">
+                    {% for error in form.website.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- ایمیل -->
+        <div class="form-group">
+            <label for="email">ایمیل</label>
+            {{ form.email(class="form-control", placeholder="ایمیل") }}
+            {% if form.email.errors %}
+                <div class="text-danger">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('create_company') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

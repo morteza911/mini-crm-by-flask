@@ -1,0 +1,176 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="container mt-3">
+    
+
+    <div class="modal fade" id="kt_modal_add_event" tabindex="-1" aria-hidden="true" data-bs-focus="false">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content">
+                <form class="form" action="{{ url_for('create_company') }}" method="post" enctype="multipart/form-data" id="kt_modal_add_event_form">
+                    {{ form.hidden_tag() }}  <!-- این خط حتما باید اضافه شود -->
+                                       <div class="modal-header">
+                        <h2 class="fw-bold">ایجاد شرکت </h2>
+                        <div class="btn btn-icon btn-sm btn-active-icon-primary" id="kt_modal_add_event_close" data-bs-dismiss="modal">
+                            <i class="ki-duotone ki-cross fs-1"></i>
+                        </div>
+                    </div>
+                    <div class="modal-body py-10 px-lg-17">
+                        <div class="row g-10">
+                          
+                           
+                           
+                           
+                            <div class="col-12 mb-3">
+                                <label class="fs-6 fw-semibold mb-2">نام </label>
+                                <input type="text" class="form-control form-control-solid" name="name" id="name" placeholder="نام " />
+                           </div>
+
+                           <div class="col-12 mb-3">
+                            <label class="fs-6 fw-semibold mb-2"> ادرس</label>
+                            <input type="text" class="form-control form-control-solid" name="address" id="address" placeholder=" ادرس" />
+                           </div>
+
+                       <div class="col-12 mb-3">
+                        <label class="fs-6 fw-semibold mb-2"> شماره تماس اول</label>
+                        <input type="text" class="form-control form-control-solid" name="phone_number" id="phone_number" placeholder="شماره تماس " />
+                   </div>
+
+                            <div class="col-12 mb-3">
+                                <label class="fs-6 fw-semibold mb-2"> شماره تماس دوم</label>
+                                <input type="text" class="form-control form-control-solid" name="phone_number_two" id="phone_number_two" placeholder=" شماره تماس دوم" />
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label class="fs-6 fw-semibold mb-2"> شماره تماس سوم</label>
+                                <input type="text" class="form-control form-control-solid" name="phone_number_three" id="phone_number_three" placeholder="شماره تماس سوم " />
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <label class="fs-6 fw-semibold mb-2">فکس </label>
+                            <input type="text" class="form-control form-control-solid" name="fax" id="fax" placeholder=" فکس" />
+                    </div>
+
+                        <div class="col-12 mb-3">
+                            <label class="fs-6 fw-semibold mb-2">وب سایت </label>
+                            <input type="text" class="form-control form-control-solid" name="website" id="website" placeholder="سایت " />
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="fs-6 fw-semibold mb-2"> ایمیل شرکت</label>
+                        <input type="text" class="form-control form-control-solid" name="email" id="email" placeholder="ایمیل " />
+                </div>
+
+                    
+            </div>
+                </div>
+                    <div class="modal-footer flex-center">
+                        <button type="reset" id="kt_modal_add_event_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">انصراف</button>
+                        <button type="submit" id="kt_modal_add_event_submit" class="btn btn-primary">
+                            <span class="indicator-label">تایید</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-header border-0 pt-6">
+            <div class="card-title">
+                
+            </div>
+            <div class="card-toolbar">
+                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                    <button class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_event">
+                        <i class="ki-duotone ki-plus fs-2"></i> ایجاد شرکت  
+                    </button>
+                </div>
+                <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">
+                    <div class="fw-bold me-5">
+                        <span class="me-2" data-kt-user-table-select="selected_count"></span>Selected
+                    </div>
+                    <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Delete Selected</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body py-4" style="overflow:auto;">
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                <thead>
+                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0 text-center">
+                        <th class="w-10px pe-2">
+                         
+                        </th> 
+                        <th>id</th>
+                        <th>نام</th>
+                        <th>آدرس </th>
+                        <th>شماره تلفن</th>
+                        <th>شماره تلفن دوم</th>
+                        <th>شماره تلفن سوم</th>
+                        <th>ایمیل</th>
+                        <th class="min-w-100px">فعالیت</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 fw-semibold text-center">
+                    {% for companies in companies %}
+                    <tr>
+                       
+                        <td class="d-flex align-items-center">
+                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                <a href="apps/user-management/users/view.html"></a>
+                            </div>
+                            
+                        </td>
+                        <td>{{ companies.id }}</td>
+                        <td>{{ companies.name }}</td>
+                        <td>{{ companies.address }}</td>
+                        <td>{{ companies.phone_number }}</td>
+                        <td>{{ companies.phone_number_two }}</td>
+                        <td>{{ companies.phone_number_three }}</td>
+                        <td>{{ companies.email }}</td>
+                      
+                        <td class="text-end">
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">فعالیت
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                            </a>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                                <!-- گزینه ویرایش -->
+                            <!-- گزینه ویرایش -->
+                            <div class="menu-item px-3">
+                                <form action="{{ url_for('update_company', company_id=companies.id) }}" method="GET" style="display:inline;">
+                                    <button type="submit" class="menu-link px-3" style="border:none; background:none; color:blue;">ویرایش</button>
+                                </form>
+                            </div>
+
+                            <!-- گزینه حذف -->
+                           <!-- گزینه حذف -->
+                            <div class="menu-item px-3">
+                                <form action="{{ url_for('delete_company', company_id=companies.id) }}" method="POST" style="display:inline;">
+                                    {{ form.csrf_token }}  <!-- اضافه کردن توکن CSRF -->
+                                    <button type="submit" class="menu-link px-3" style="border:none; background:none; color:red;">حذف</button>
+                                </form>
+                            </div>
+
+
+                            </div>
+                    </tr>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,84 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی اطلاعات مشتری</h2>
+    
+    <!-- فرم بروزرسانی مشتری -->
+    <form class="form" action="{{ url_for('update_customer', customer_id=customer.id) }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+        <!-- نام -->
+        <div class="form-group">
+            <label for="name">نام</label>
+            {{ form.name(class="form-control", placeholder="نام مشتری") }}
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {{ form.name.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- نام خانوادگی -->
+        <div class="form-group">
+            <label for="family">نام خانوادگی</label>
+            {{ form.family(class="form-control", placeholder="نام خانوادگی") }}
+            {% if form.family.errors %}
+                <div class="text-danger">
+                    {{ form.family.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شماره تماس اول -->
+        <div class="form-group">
+            <label for="phone_number">شماره تماس اول</label>
+            {{ form.phone_number(class="form-control", placeholder="شماره تماس اول") }}
+            {% if form.phone_number.errors %}
+                <div class="text-danger">
+                    {{ form.phone_number.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شماره تماس دوم -->
+        <div class="form-group">
+            <label for="phone_number_two">شماره تماس دوم</label>
+            {{ form.phone_number_two(class="form-control", placeholder="شماره تماس دوم") }}
+            {% if form.phone_number_two.errors %}
+                <div class="text-danger">
+                    {{ form.phone_number_two.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شماره تماس سوم -->
+        <div class="form-group">
+            <label for="phone_number_three">شماره تماس سوم</label>
+            {{ form.phone_number_three(class="form-control", placeholder="شماره تماس سوم") }}
+            {% if form.phone_number_three.errors %}
+                <div class="text-danger">
+                    {{ form.phone_number_three.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- ایمیل -->
+        <div class="form-group">
+            <label for="email">ایمیل</label>
+            {{ form.email(class="form-control", placeholder="ایمیل مشتری") }}
+            {% if form.email.errors %}
+                <div class="text-danger">
+                    {{ form.email.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('Customers') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <!-- دسته بندی بر اساس stage_id -->
+    {% for stage in stages %}
+        <div class="mb-5">
+            <h5>کاریز : {{ stage.name }}</h5> <!-- نمایش نام stage -->
+            <div class="row">
+                <!-- کارت‌های مذاکرات مربوط به این stage -->
+                {% for negotiation in negotiations %}
+                    {% if negotiation.stage_id == stage.id %}
+                        <div class="col-md-4">
+                            <div class="card card-flush py-3 px-4 flex-row-fluid mb-4" style="max-width: 410px;">
+                                
+                                <div class="card-body pt-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-300px">
+                                            <tbody class="fw-semibold text-gray-600">
+                                                <tr>
+                                                    <td class="text-muted">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="ki-outline ki-profile-circle fs-2 ms-2"></i>   عنوان مذاکره 
+                                                        </div>
+                                                    </td>
+                                                    <td class="fw-bold text-start">
+                                                        {% if negotiation.topic %}
+                                                            {{ negotiation.topic }} 
+                                                        {% else %}
+                                                            تعریف نشده  
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>   
+                                                <tr>
+                                                    <td class="text-muted">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="ki-outline ki-wallet fs-2 ms-2"></i> شرکت  
+                                                        </div>
+                                                    </td>
+                                                    <td class="fw-bold text-start">  
+                                                        {% if negotiation.company %}
+                                                        {{ negotiation.company.name }}
+                                                    {% else %}
+                                                        تعریف نشده  
+                                                    {% endif %}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-muted">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="ki-outline ki-devices fs-2 ms-2"></i> مبلغ مذاکره
+                                                        </div>
+                                                    </td>
+                                                    <td class="fw-bold text-start">
+                                                        {% if negotiation.amount %}
+                                                            {{ negotiation.amount }}
+                                                        {% else %}
+                                                            تعریف نشده  
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

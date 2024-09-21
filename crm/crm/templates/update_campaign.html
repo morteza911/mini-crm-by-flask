@@ -1,0 +1,44 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی کمپین</h2>
+    
+    <!-- فرم بروزرسانی کمپین -->
+    <form class="form" action="{{ url_for('update_campaign', campaign_id=campaign.id) }}" method="POST">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+        <!-- نام کمپین -->
+        <div class="form-group">
+            <label for="name">نام کمپین</label>
+            {{ form.name(class="form-control", placeholder="نام کمپین") }}
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {% for error in form.name.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- توضیحات کمپین -->
+        <div class="form-group">
+            <label for="description">توضیحات کمپین</label>
+            {{ form.description(class="form-control", placeholder="توضیحات کمپین") }}
+            {% if form.description.errors %}
+                <div class="text-danger">
+                    {% for error in form.description.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('create_campaign') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

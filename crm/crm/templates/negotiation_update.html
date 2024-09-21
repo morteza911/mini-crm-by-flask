@@ -1,0 +1,123 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی مذاکره</h2>
+    
+    <!-- فرم بروزرسانی مذاکره -->
+    <form class="form" action="{{ url_for('update_negotiation', negotiation_id=negotiation.id) }}" method="POST">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+        <!-- موضوع مذاکره -->
+        <div class="form-group">
+            <label for="topic">موضوع مذاکره</label>
+            {{ form.topic(class="form-control", placeholder="موضوع مذاکره") }}
+            {% if form.topic.errors %}
+                <div class="text-danger">
+                    {% for error in form.topic.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- شرکت -->
+        <div class="form-group">
+            <label for="company_id">شرکت</label>
+            {{ form.company_id(class="form-control", placeholder="شرکت") }}
+            {% if form.company_id.errors %}
+                <div class="text-danger">
+                    {% for error in form.company_id.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- مشتری -->
+        <div class="form-group">
+            <label for="customer_id">مشتری</label>
+            {{ form.customer_id(class="form-control", placeholder="مشتری") }}
+            {% if form.customer_id.errors %}
+                <div class="text-danger">
+                    {% for error in form.customer_id.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- مبلغ -->
+        <div class="form-group">
+            <label for="amount">مبلغ</label>
+            {{ form.amount(class="form-control", placeholder="مبلغ") }}
+            {% if form.amount.errors %}
+                <div class="text-danger">
+                    {% for error in form.amount.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- انجام شده -->
+        <div class="form-group">
+            <label for="done">انجام شده</label>
+            {{ form.done(class="form-control") }}
+            {% if form.done.errors %}
+                <div class="text-danger">
+                    {% for error in form.done.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- مرحله -->
+        <div class="form-group">
+            <label for="stage_id">مرحله</label>
+            {{ form.stage_id(class="form-control", placeholder="مرحله") }}
+            {% if form.stage_id.errors %}
+                <div class="text-danger">
+                    {% for error in form.stage_id.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+
+        <!-- اولویت -->
+        <div class="form-group">
+            <label for="priority">اولویت</label>
+            {{ form.priority(class="form-control", placeholder="اولویت") }}
+            {% if form.priority.errors %}
+                <div class="text-danger">
+                    {% for error in form.priority.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- کمپین -->
+        <div class="form-group">
+            <label for="campaign_id">کمپین</label>
+            {{ form.campaign_id(class="form-control", placeholder="کمپین") }}
+            {% if form.campaign_id.errors %}
+                <div class="text-danger">
+                    {% for error in form.campaign_id.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('create_negotiation') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی مرحله</h2>
+    
+    <!-- فرم بروزرسانی مرحله -->
+    <form class="form" action="{{ url_for('update_stage', stage_id=stage.id) }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+        <!-- نام مرحله -->
+        <div class="form-group">
+            <label for="name">نام مرحله</label>
+            {{ form.name(class="form-control", placeholder="نام مرحله") }}
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {{ form.name.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('create_stage') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

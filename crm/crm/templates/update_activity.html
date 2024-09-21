@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی اطلاعات فعالیت</h2>
+    
+    <!-- فرم بروزرسانی فعالیت -->
+    <form class="form" action="{{ url_for('update_activity', activity_id=activity.id) }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+        <!-- نام فعالیت -->
+        <div class="form-group">
+            <label for="name">نام فعالیت</label>
+            {{ form.name(class="form-control", placeholder="نام فعالیت") }}
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {{ form.name.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('activity') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="text-center">بروزرسانی رکورد</h2>
+    
+    <!-- فرم بروزرسانی رکورد -->
+    <form class="form" action="{{ url_for('update_record', record_id=record.id) }}" method="POST">
+        {{ form.hidden_tag() }} <!-- توکن CSRF و فیلدهای پنهان -->
+
+     
+
+        <!-- فعالیت -->
+        <div class="form-group">
+            <label for="activity_id">فعالیت</label>
+            {{ form.activity_id(class="form-control", placeholder="انتخاب فعالیت") }}
+            {% if form.activity_id.errors %}
+                <div class="text-danger">
+                    {% for error in form.activity_id.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- توضیحات -->
+        <div class="form-group">
+            <label for="note">توضیحات</label>
+            {{ form.note(class="form-control", placeholder="توضیحات") }}
+            {% if form.note.errors %}
+                <div class="text-danger">
+                    {% for error in form.note.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- دکمه‌های ارسال و انصراف -->
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            <a href="{{ url_for('create_record') }}" class="btn btn-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
